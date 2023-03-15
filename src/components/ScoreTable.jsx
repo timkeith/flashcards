@@ -16,7 +16,7 @@ const ScoreTable = ({ scores, questions }) => {
                   <td>
                   {
                     row.map((word, j) => (
-                      <span key={j} className='nowrap'>{(j > 0 ? ", " : "") + word}</span>
+                      <span key={j} className='nowrap'>{(j > 0 ? ', ' : '') + word}</span>
                     ))
                   }
                   </td>
