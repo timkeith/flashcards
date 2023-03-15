@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 const Checkbox = ({ label, isChecked, onChange }) => (
   <div className='Checkbox'>
@@ -77,16 +78,16 @@ class DeckPicker extends Component {
     return (
       <div id='DeckPicker'>
         <h1>Choose Decks to Study</h1>
-        <button
-          className='btn btn-primary m-2'
+        <Button
+          variant='primary'
           onClick={this.handleSelectDeselectAll(true)}>
           Select All
-        </button>
-        <button
-          className='btn btn-primary m-2'
+        </Button>
+        <Button
+          variant='primary'
           onClick={this.handleSelectDeselectAll(false)}>
           Deselect All
-        </button>
+        </Button>
         {
           Object.entries(this.state.decks).map((x) => (
             <Checkbox
@@ -97,12 +98,12 @@ class DeckPicker extends Component {
             />
           ))
         }
-        <button
-          className='btn btn-primary m-2'
+        <Button
+          variant='primary'
           disabled={!this.areAnyChecked()}
           onClick={this.handleBegin}>
           Begin
-        </button>
+        </Button>
         <label className='reverse-checkbox'>
           <input
             type='checkbox'

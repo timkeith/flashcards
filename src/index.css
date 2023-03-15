@@ -23,6 +23,10 @@ body {
 #DeckPicker {
   font-size: 150%;
 }
+#DeckPicker button {
+  margin: 0.5em;
+}
+
 .Checkbox input {
   margin-right: 0.5em;
 }
@@ -67,6 +71,7 @@ body {
 
 #ScoreTable {
   margin-top: 1em;
+  width: 30em;
 }
 
 #ScoreTable td.level {

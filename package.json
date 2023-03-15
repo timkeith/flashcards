@@ -8,11 +8,12 @@
   },
   "homepage": "https://timkeith.github.io/flashcards",
   "dependencies": {
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^4.6.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "react": "^16.14.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^16.14.0",
     "react-scripts": "^2.1.3",
     "typescript": "^3.9.10"
