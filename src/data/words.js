@@ -134,7 +134,6 @@ const Words = {
     'to come', 'venire',
     'to die', 'morire',
     'to finish', 'finire',
-    'to finish', 'finire',
     'to go out', 'uscire',
     'to leave', 'partire',
     'to open', 'aprire',

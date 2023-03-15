@@ -2,41 +2,11 @@ import React, { Component } from 'react';
 import DeckPicker from './components/DeckPicker';
 import ScoreTable from './components/ScoreTable';
 import Flashcard from './components/Flashcard';
-import { MAX_SCORE, SCORES } from './components/Config';
 import Words from './data/words.js';
+import Util from './components/Util.js';
 
-const SCALE = 4;  // each bucket is SCALE times as likely as the next
-
-// Pick a word at random
-const pickWord = (buckets, scores) => {
-  const count = buckets.map((n, i) => (n * SCALE**(MAX_SCORE - i)));
-  const sum = count.reduce((x, y) => x + y, 0);
-  const prob = count.map((n) => (n / sum));
-  var r = Math.random();
-  console.log('r:', r, '  prob:', prob);
-  var s = 0;
-  for (; s < buckets.length; ++s) {
-    r -= prob[s];
-    if (r < 0) break;
-  }
-  var j = Math.floor(Math.random() * buckets[s]);
-  var currentWord;
-  for (var i = 0; i < scores.length; ++i) {
-    if (scores[i] === s) {
-      if (j === 0) {
-        currentWord = i;
-        break;
-      }
-      j -= 1;
-    }
-  }
-  //console.log('currentWord:', currentWord);
-  if (currentWord === undefined) {
-    console.log('currentWord undefined');
-    console.log(`want element ${j} of ${buckets[s]} from bucket ${s}`);
-  }
-  return currentWord;
-}
+// Start at 1 so room to go down.
+const START_SCORE = 1;
 
 class App extends Component {
 
@@ -47,20 +17,30 @@ class App extends Component {
       questions: [],  // i -> question in lang1
       answers:   [],  // i -> answer in lang2
       scores:    [],  // i -> score for that pair
-      buckets:   [],  // score -> number with that score
+      buckets:   [],  // score -> [ indices with that score ]
     };
   }
 
   doEvaluation = (delta) => {
     let scores = [...this.state.scores];
     const oldScore = scores[this.state.currentWord];
-    const newScore = Math.max(0, Math.min(MAX_SCORE, oldScore + delta));
+    const newScore = Math.max(0, Math.min(Util.MAX_SCORE, oldScore + delta));
     scores[this.state.currentWord] = newScore;
-    let buckets = [...this.state.buckets];
-    buckets[oldScore] -= 1;
-    buckets[newScore] += 1;
-    const currentWord = pickWord(buckets, scores);
-    this.setState({ currentWord: currentWord, scores: scores, buckets: buckets });
+    const buckets = Util.moveBucket(
+      this.state.buckets, this.state.currentWord, oldScore, newScore);
+    this.setState({
+      currentWord: this.pickFromBuckets(buckets),
+      scores:      scores,
+      buckets:     buckets,
+    });
+  };
+
+  // Don't pick the same word twice in a row
+  pickFromBuckets = (buckets) => {
+    for (;;) {
+      const word = Util.pickFromBuckets(buckets);
+      if (word !== this.state.currentWord) return word;
+    }
   };
 
   doBegin = (decks, reverse) => {
@@ -69,16 +49,16 @@ class App extends Component {
     var questions = [];
     var answers = [];
     var scores = [];
+    var buckets = Array.from(Array(Util.MAX_SCORE+1)).map(() => []);
     for (var j = 0; j < decks.length; ++j) {
       const list = Words[decks[j]];
       for (var i = 0; i < list.length; i += 2) {
+        buckets[START_SCORE].push(questions.length);
         questions.push(list[i+d1]);
         answers.push(list[i+d2]);
-        scores.push(0);
+        scores.push(START_SCORE);
       }
     }
-    var buckets = [...SCORES];
-    buckets[0] = questions.length;
     this.setState({
       haveBegun:   true,
       decks:       decks,
@@ -86,7 +66,7 @@ class App extends Component {
       answers:     answers,
       scores:      scores,
       buckets:     buckets,
-      currentWord: Math.floor(Math.random() * questions.length),
+      currentWord: Util.pickFromBuckets(buckets),
     });
   }
 

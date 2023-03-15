@@ -22,6 +22,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "gen-words": "perl gen-words.pl  < words.csv > src/data/words.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

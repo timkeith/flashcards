@@ -1,18 +1,23 @@
 import React from 'react';
-import { MAX_SCORE, SCORES } from './Config';
+import Util from './Util.js';
 
 const ScoreTable = ({ scores, questions }) => {
-  const rows = SCORES.map((i) => ([]));
+  const rows = Array.from(Array(Util.MAX_SCORE+1)).map(() => []);
   scores.map((s, i) => rows[s].push(questions[i]));
+  const overall = scores.reduce((result, s, index) => {
+    return result + Math.max(s - 1, 0);
+  }, 0) * 100 / 3 / questions.length;
   return (
     <div id='ScoreTable'>
       <table>
         <tbody>
-          <tr><td className='level' colSpan='2'>Knowledge level:</td></tr>
+          <tr><td className='level' colSpan='2'>
+            Knowledge level: {Math.floor(overall + .5)}%
+          </td></tr>
           {
             rows.reverse().map((row, i) => (
                 <tr key={i}>
-                  <td className='level'>Level&nbsp;{MAX_SCORE - i}:</td>
+                  <td className='level'>Level&nbsp;{rows.length - 1 - i}:</td>
                   <td>
                   {
                     row.map((word, j) => (
