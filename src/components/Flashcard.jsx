@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 class Flashcard extends Component {
   state = {
@@ -13,9 +14,9 @@ class Flashcard extends Component {
   render() {
     const { question, answer } = this.props;
     const evaluations = [
-      { delta: -1, className: 'btn-danger',  title: 'Not at all' },
-      { delta:  0, className: 'btn-warning', title: 'A little' },
-      { delta: +1, className: 'btn-success', title: 'Very well' },
+      { delta: -1, variant: 'danger',  title: 'Not at all' },
+      { delta:  0, variant: 'warning', title: 'A little' },
+      { delta: +1, variant: 'success', title: 'Very well' },
     ];
 
     return (
@@ -34,24 +35,24 @@ class Flashcard extends Component {
           <div className='language' hidden={this.state.showAnswer}>
           </div>
           <div className='word' hidden={this.state.showAnswer}>
-            <button
-              className='btn btn-primary m-2'
+            <Button
+              variant='primary'
               onClick={() => { this.setState({showAnswer: true}) }}>
               Show
-            </button>
+            </Button>
           </div>
           <div className='language' hidden={!this.state.showAnswer}>
             <div className='smaller'>How well did you know it?</div>
           </div>
           <div className='word' hidden={!this.state.showAnswer}>
             {evaluations.map((e) => (
-              <button
+              <Button
                 key={e.delta}
-                className={`btn ${e.className} m-2`}
+                variant={e.variant}
                 title={e.title}
                 onClick={() => { this.doEvaluation(e.delta); }}>
                 {e.delta > 0 ? "+" : e.delta < 0 ? "-" : "0"}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
