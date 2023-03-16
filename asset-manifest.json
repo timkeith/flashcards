@@ -1,16 +1,16 @@
 {
-  "main.css": "/flashcards/static/css/main.a338c498.chunk.css",
-  "main.js": "/flashcards/static/js/main.94317782.chunk.js",
-  "main.js.map": "/flashcards/static/js/main.94317782.chunk.js.map",
+  "main.css": "/flashcards/static/css/main.e0a37aa4.chunk.css",
+  "main.js": "/flashcards/static/js/main.922ca7ad.chunk.js",
+  "main.js.map": "/flashcards/static/js/main.922ca7ad.chunk.js.map",
   "static/css/1.8f356895.chunk.css": "/flashcards/static/css/1.8f356895.chunk.css",
-  "static/js/1.c845acdd.chunk.js": "/flashcards/static/js/1.c845acdd.chunk.js",
-  "static/js/1.c845acdd.chunk.js.map": "/flashcards/static/js/1.c845acdd.chunk.js.map",
+  "static/js/1.8a32e37a.chunk.js": "/flashcards/static/js/1.8a32e37a.chunk.js",
+  "static/js/1.8a32e37a.chunk.js.map": "/flashcards/static/js/1.8a32e37a.chunk.js.map",
   "runtime~main.js": "/flashcards/static/js/runtime~main.bf0c7529.js",
   "runtime~main.js.map": "/flashcards/static/js/runtime~main.bf0c7529.js.map",
   "static/media/font-awesome.css": "/flashcards/static/media/fontawesome-webfont.912ec66d.svg",
-  "static/css/main.a338c498.chunk.css.map": "/flashcards/static/css/main.a338c498.chunk.css.map",
+  "static/css/main.e0a37aa4.chunk.css.map": "/flashcards/static/css/main.e0a37aa4.chunk.css.map",
   "static/css/1.8f356895.chunk.css.map": "/flashcards/static/css/1.8f356895.chunk.css.map",
   "index.html": "/flashcards/index.html",
-  "precache-manifest.43f6b0f0b340ebb218b42109ec6217fc.js": "/flashcards/precache-manifest.43f6b0f0b340ebb218b42109ec6217fc.js",
+  "precache-manifest.fb3b9addec21240cd21286e921da7914.js": "/flashcards/precache-manifest.fb3b9addec21240cd21286e921da7914.js",
   "service-worker.js": "/flashcards/service-worker.js"
 }
