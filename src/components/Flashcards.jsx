@@ -8,7 +8,7 @@ import Util from './Util.js';
 // Start at 1 so room to go down.
 const START_SCORE = 1;
 
-class App extends Component {
+class Flashcards extends Component {
 
   constructor(props) {
     super(props);
@@ -95,4 +95,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Flashcards;

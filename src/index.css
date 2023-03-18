@@ -21,7 +21,7 @@ body {
 }
 
 #DeckPicker {
-  font-size: 150%;
+  font-size: 120%;
 }
 #DeckPicker button {
   margin: 0.5em;
@@ -40,24 +40,25 @@ body {
 }
 
 #Flashcard {
-  font-size: 200%;
+  font-size: 150%;
 }
 
 .language {
   display: inline-block;
-  width: 7em;
+  width:   5em;
+  vertical-align: middle;
   /* border: 1px solid red; */
 }
 .word {
   display: inline-block;
+  width: 10em;
+  vertical-align: middle;
   /* border: 1px solid red; */
-  width: 7em;
 }
 .word button {
-  font-size: 50%;
-  font-weight: bold;
-  /* color: black; */
-  margin-right: .4em;
+  font-size:    50%;
+  font-weight:  bold;
+  margin-right: 1em;
 }
 .evaluate {
   /* border: 1px solid red; */
@@ -72,7 +73,7 @@ body {
 
 #ScoreTable {
   margin-top: 1em;
-  width: 30em;
+  width: 20em;
 }
 
 #ScoreTable td.level {

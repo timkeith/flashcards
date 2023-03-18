@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import Flashcards from './components/Flashcards';
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<Flashcards/>, document.getElementById('root'));
