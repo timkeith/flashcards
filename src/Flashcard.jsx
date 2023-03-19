@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-export default function Flashcard(props) {
-  const [showAnswer, set_showAnswer] = useState('');
-  const { question, answer, doEvaluation } = props;
-  const evaluations = [
-    { delta: -1, variant: 'danger',  title: 'Not at all' },
-    { delta:  0, variant: 'warning', title: 'A little' },
-    { delta: +1, variant: 'success', title: 'Very well' },
-  ];
+const evaluations = [
+  { delta: -1, variant: 'danger',  title: 'Not at all' },
+  { delta:  0, variant: 'warning', title: 'A little' },
+  { delta: +1, variant: 'success', title: 'Very well' },
+];
 
+export default function Flashcard({ question, answer, doEvaluation }) {
+  const [showAnswer, set_showAnswer] = useState('');
   return (
     <div id='Flashcard'>
       <div>

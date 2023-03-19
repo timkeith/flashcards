@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import DeckPicker from './DeckPicker';
-import ScoreTable from './ScoreTable';
-import Flashcard from './Flashcard';
-import Words from '../data/words.js';
+import DeckPicker from './DeckPicker.jsx';
+import ScoreTable from './ScoreTable.jsx';
+import Flashcard from './Flashcard.jsx';
+import Words from './data/words.js';
 import Util from './Util.js';
 
 // Start at 1 so room to go down.

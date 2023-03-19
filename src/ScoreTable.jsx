@@ -1,6 +1,6 @@
 import React from 'react';
-import Util from './Util.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Util from './Util.js';
 
 const ScoreTable = ({ scores, questions }) => {
   const rows = Array.from(Array(Util.MAX_SCORE+1)).map(() => []);
@@ -16,11 +16,6 @@ const ScoreTable = ({ scores, questions }) => {
       />
       <table>
         <tbody>
-          {/*
-          <tr><td className='level' colSpan='2'>
-            Knowledge level: {Math.floor(overall + .5)}%
-          </td></tr>
-          */}
           {
             rows.reverse().map((row, i) => (
                 <tr key={i}>
