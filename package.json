@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "^19.8.1",
-    "npm": "^9.5.1"
+    "node": "^18.7.0",
+    "npm": "^8.18.0"
   },
-  "homepage": "https://timkeith.github.io/flashcards",
+  "homepage": "http://valleyvistafarm.com/flashcards",
   "dependencies": {
     "bootstrap": "^4.6.2",
     "font-awesome": "^4.7.0",
-    "fsevents": "^2.3.2",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "react": "^16.14.0",
