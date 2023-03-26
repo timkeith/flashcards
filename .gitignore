@@ -4,9 +4,11 @@
 /node_modules
 
 # production
-#!/build
+/build
 
 # misc
 .DS_Store
 npm-debug.log*
 tags
+npm-install.log
+*.swp
