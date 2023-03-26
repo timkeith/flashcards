@@ -19,12 +19,12 @@ const Words = {
   ],
   'Andare': [
     'andare', 'to go',
-    '(andare) io', '(fare) vado',
-    '(andare) tu', '(fare) vai',
-    '(andare) lui/lei', '(fare) va',
-    '(andare) noi', '(fare) andiamo',
-    '(andare) voi', '(fare) andate',
-    '(andare) loro', '(fare) vanno',
+    '(andare) io', '(andare) vado',
+    '(andare) tu', '(andare) vai',
+    '(andare) lui/lei', '(andare) va',
+    '(andare) noi', '(andare) andiamo',
+    '(andare) voi', '(andare) andate',
+    '(andare) loro', '(andare) vanno',
   ],
   'Essere': [
     'I am', 'io sono',
@@ -33,6 +33,14 @@ const Words = {
     'we are', 'noi siamo',
     'you all are', 'voi siete',
     'they are', 'loro sono',
+  ],
+  'Stare (to be/stay/remain/live)': [
+    'I stay', 'io sto',
+    'you stay', 'tu stai',
+    'he/she stay', 'lui/lei sta',
+    'we stay', 'noi stiamo',
+    'you stay', 'voi state',
+    'they stay', 'loro stanno',
   ],
   'Volere': [
     'I want', 'io voglio',
