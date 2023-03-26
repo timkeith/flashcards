@@ -37,7 +37,7 @@ const Words = {
   'Stare (to be/stay/remain/live)': [
     'I stay', 'io sto',
     'you stay', 'tu stai',
-    'he/she stay', 'lui/lei sta',
+    'he/she stays', 'lui/lei sta',
     'we stay', 'noi stiamo',
     'you stay', 'voi state',
     'they stay', 'loro stanno',
