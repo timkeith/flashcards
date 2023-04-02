@@ -1,14 +1,8 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# private key:
+/credentials
 
-# dependencies
 /node_modules
-
-# production
 /build
 
-# misc
-.DS_Store
 npm-debug.log*
-tags
 npm-install.log
-*.swp

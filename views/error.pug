@@ -1,0 +1,7 @@
+block content
+  h1.error Error
+  h3.error
+    if error.status == 404
+      pre Not found: #{url}
+    else
+      pre #{error.message}

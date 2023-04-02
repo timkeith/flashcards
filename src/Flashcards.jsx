@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DeckPicker from './DeckPicker.jsx';
 import ScoreTable from './ScoreTable.jsx';
 import Flashcard from './Flashcard.jsx';
-import Words from './data/words.js';
 import Util from './Util.js';
 
 // Start at 1 so room to go down.
@@ -13,7 +12,9 @@ class Flashcards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      haveBegun: false,
+      error:     undefined,
+      words:     undefined,  // undefined if words haven't been fetched
+      decks:     undefined, // undefined if decks haven't been chosen
       questions: [],  // i -> question in lang1
       answers:   [],  // i -> answer in lang2
       scores:    [],  // i -> score for that pair
@@ -51,7 +52,7 @@ class Flashcards extends Component {
     var scores = [];
     var buckets = Array.from(Array(Util.MAX_SCORE+1)).map(() => []);
     for (var j = 0; j < decks.length; ++j) {
-      const list = Words[decks[j]];
+      const list = this.state.words[decks[j]];
       for (var i = 0; i < list.length; i += 2) {
         buckets[START_SCORE].push(questions.length);
         questions.push(list[i+d1]);
@@ -59,22 +60,31 @@ class Flashcards extends Component {
         scores.push(START_SCORE);
       }
     }
-    this.setState({
-      haveBegun:   true,
-      decks:       decks,
-      questions:   questions,
-      answers:     answers,
-      scores:      scores,
-      buckets:     buckets,
-      currentWord: Util.pickFromBuckets(buckets),
-    });
+    if (questions.length <= 1) {
+      this.setState({error: 'More than one word must be selected'});
+    } else {
+      this.setState({
+        decks:       decks,
+        questions:   questions,
+        answers:     answers,
+        scores:      scores,
+        buckets:     buckets,
+        currentWord: Util.pickFromBuckets(buckets),
+      });
+    }
   }
 
   render() {
-    if (!this.state.haveBegun) {
-      return (
-        <DeckPicker words={Words} doBegin={this.doBegin} />
-      );
+    if (this.state.error) {
+      return <div class='error'>Error: {this.state.error}</div>
+    } else if (this.state.words === undefined) {
+      fetch('/words')
+        .then(res => res.json())
+        .then(data => this.setState({words: data}))
+        .catch(err => this.setState({error: err.message}));
+      return <div>Fetching word list...</div>;
+    } else if (this.state.decks === undefined) {
+      return <DeckPicker words={this.state.words} doBegin={this.doBegin} />;
     } else {
       const question = this.state.questions[this.state.currentWord];
       const answer = this.state.answers[this.state.currentWord];
