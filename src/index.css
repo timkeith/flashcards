@@ -56,11 +56,15 @@ body {
   /* border: 1px solid red; */
 }
 .word button {
-  font-size:    50%;
-  font-weight:  bold;
-  margin-right: 1em;
+  font-size:        75%;
+  font-weight:      bold;
+  margin-right:     1em;
+  color:            black;
+  background-color: #eee;
+  border-color:     black;
 }
 .evaluate {
+  margin-top: 0.5em;
   /* border: 1px solid red; */
 }
 .evaluate .language {
@@ -124,6 +128,22 @@ code {
 .btn {
   cursor: pointer !important;
 }
+.btn-danger {
+  color: black;
+  background-color: #eee;
+  border-color: black;
+}
+.btn-warning {
+  color: black;
+  background-color: #888;
+  border-color: black;
+}
+.btn-success {
+  color: black;
+  background-color: #444;
+  border-color: black;
+}
+
 .badge {
   width: 70px !important;
 }

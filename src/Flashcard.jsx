@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 const evaluations = [
-  { delta: -1, variant: 'danger',  title: 'Not at all' },
-  { delta:  0, variant: 'warning', title: 'A little' },
-  { delta: +1, variant: 'success', title: 'Very well' },
+  { delta: -1, title: 'Not at all' },
+  { delta:  0, title: 'A little' },
+  { delta: +1, title: 'Very well' },
 ];
 
 export default function Flashcard({ question, answer, doEvaluation }) {
@@ -16,7 +16,7 @@ export default function Flashcard({ question, answer, doEvaluation }) {
         <div className='word'>{question}</div>
       </div>
       <div>
-        <div className='language'>Riposta:</div>
+        <div className='language'>Risposta:</div>
         <div className='word' hidden={!showAnswer}>
           {answer}
         </div>
@@ -38,7 +38,6 @@ export default function Flashcard({ question, answer, doEvaluation }) {
           {evaluations.map((e) => (
             <Button
               key={e.delta}
-              variant={e.variant}
               title={e.title}
               onClick={() => { set_showAnswer(false); doEvaluation(e.delta); }}>
               {e.delta > 0 ? '+' : e.delta < 0 ? '-' : '0'}
