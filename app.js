@@ -11,7 +11,7 @@ const staticDir = path.join(dirname, 'build');
 
 const router = express.Router();
 router.get(/\/.*/, (req, res) => {
-  const url = req.url.replace(/^\/flashcards\//, '/');
+  const url = req.url.replace(/^\/flashcards(\/|$)/, '/');
   if (url === '/words') {
     try {
       GetWords(words => res.json(words));
