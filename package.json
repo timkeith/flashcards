@@ -7,7 +7,7 @@
     "node": "^18.7.0",
     "npm": "^8.18.0"
   },
-  "homepage": "http://valleyvistafarm.com/",
+  "homepage": "http://valleyvistafarm.com/flashcards",
   "dependencies": {
     "bootstrap": "^4.6.2",
     "cookie-parser": "~1.4.4",
