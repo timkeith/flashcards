@@ -78,7 +78,7 @@ class Flashcards extends Component {
     if (this.state.error) {
       return <div class='error'>Error: {this.state.error}</div>
     } else if (this.state.words === undefined) {
-      fetch('/words')
+      fetch('/flashcards/words')
         .then(res => res.json())
         .then(data => this.setState({words: data}))
         .catch(err => this.setState({error: err.message}));

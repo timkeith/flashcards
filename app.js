@@ -10,25 +10,16 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 const staticDir = path.join(dirname, 'build');
 
 const router = express.Router();
-router.get('/words', (req, res, next) => {
-  try {
-    GetWords(words => res.json(words));
-  } catch (err) {
-    next(err);
-  }
-});
 router.get(/\/.*/, (req, res) => {
   const url = req.url.replace(/^\/flashcards\//, '/');
   if (url === '/words') {
-    console.error('bad GET /words');
-    //try {
-    //  GetWords(words => res.json(words));
-    //} catch (err) {
-    //  next(err);
-    //}
+    try {
+      GetWords(words => res.json(words));
+    } catch (err) {
+      next(err);
+    }
   } else {
     const file = path.join(staticDir, url);
-    console.log('send', file);
     res.sendFile(path.join(staticDir, url));
   }
 });
