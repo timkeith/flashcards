@@ -77,7 +77,7 @@ class DeckPicker extends Component {
   render() {
     return (
       <div id='DeckPicker'>
-        <h1>Choose Decks to Study</h1>
+        <h2>Choose Decks to Study</h2>
         <Button
           variant='primary'
           onClick={this.handleSelectDeselectAll(true)}>

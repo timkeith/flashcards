@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import GroupPicker from './GroupPicker.jsx';
 import DeckPicker from './DeckPicker.jsx';
-import ScoreTable from './ScoreTable.jsx';
 import Flashcard from './Flashcard.jsx';
+import ScoreTable from './ScoreTable.jsx';
 import Util from './Util.js';
 
 // Start at 1 so room to go down.
@@ -14,6 +15,7 @@ class Flashcards extends Component {
     this.state = {
       error:     undefined,
       words:     undefined,  // undefined if words haven't been fetched
+      group:     undefined,  // undefined if group hasn't been chosen
       decks:     undefined, // undefined if decks haven't been chosen
       questions: [],  // i -> question in lang1
       answers:   [],  // i -> answer in lang2
@@ -72,7 +74,11 @@ class Flashcards extends Component {
         currentWord: Util.pickFromBuckets(buckets),
       });
     }
-  }
+  };
+
+  setGroup = (group) => {
+    this.setState({group: group, words: this.state.words[group]});
+  };
 
   render() {
     if (this.state.error) {
@@ -83,6 +89,8 @@ class Flashcards extends Component {
         .then(data => this.setState({words: data}))
         .catch(err => this.setState({error: err.message}));
       return <div>Fetching word list...</div>;
+    } else if (this.state.group === undefined) {
+      return <GroupPicker groups={Object.keys(this.state.words)} handler={this.setGroup} />;
     } else if (this.state.decks === undefined) {
       return <DeckPicker words={this.state.words} doBegin={this.doBegin} />;
     } else {

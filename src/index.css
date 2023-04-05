@@ -9,15 +9,13 @@ body {
   user-select: none;
 }
 
-/*
-#root {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-*/
 #root {
   margin-left: 2em;
+}
+
+#GroupPicker input {
+  margin-right: 0.5em;
+  margin-left: 0.5em;
 }
 
 #DeckPicker {
@@ -47,13 +45,11 @@ body {
   display: inline-block;
   width:   5em;
   vertical-align: middle;
-  /* border: 1px solid red; */
 }
 .word {
   display: inline-block;
-  width: 10em;
+  width: 12em;
   vertical-align: middle;
-  /* border: 1px solid red; */
 }
 .word button {
   font-size:        75%;
