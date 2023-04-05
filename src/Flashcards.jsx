@@ -8,6 +8,10 @@ import Util from './Util.js';
 // Start at 1 so room to go down.
 const START_SCORE = 1;
 
+const BackButton = ({ onClick }) => {
+  return <button className='back' onClick={onClick}>&lt; Back</button>;
+};
+
 class Flashcards extends Component {
 
   constructor(props) {
@@ -53,8 +57,9 @@ class Flashcards extends Component {
     var answers = [];
     var scores = [];
     var buckets = Array.from(Array(Util.MAX_SCORE+1)).map(() => []);
+    const words = this.state.words[this.state.group];
     for (var j = 0; j < decks.length; ++j) {
-      const list = this.state.words[decks[j]];
+      const list = words[decks[j]];
       for (var i = 0; i < list.length; i += 2) {
         buckets[START_SCORE].push(questions.length);
         questions.push(list[i+d1]);
@@ -77,38 +82,48 @@ class Flashcards extends Component {
   };
 
   setGroup = (group) => {
-    this.setState({group: group, words: this.state.words[group]});
+    this.setState({group: group});
   };
 
   render() {
     if (this.state.error) {
       return <div class='error'>Error: {this.state.error}</div>
     } else if (this.state.words === undefined) {
-      fetch('/flashcards/words')
-        .then(res => res.json())
-        .then(data => this.setState({words: data}))
-        .catch(err => this.setState({error: err.message}));
-      return <div>Fetching word list...</div>;
+      Util.fetchWords(
+        (words) => this.setState({words: words}),
+        (error) => this.setState({error: error}));
+      return <>
+        <h1>Italian Flashcards</h1>
+        <div>Fetching word list...</div>
+      </>;
     } else if (this.state.group === undefined) {
-      return <GroupPicker groups={Object.keys(this.state.words)} handler={this.setGroup} />;
+      return <>
+        <h1>Italian Flashcards</h1>
+        <GroupPicker groups={Object.keys(this.state.words)} handler={this.setGroup} />
+      </>;
     } else if (this.state.decks === undefined) {
-      return <DeckPicker words={this.state.words} doBegin={this.doBegin} />;
+      return <>
+        <BackButton onClick={() => this.setState({group: undefined})} />
+        <h1>Flashcards: {this.state.group}</h1>
+        <DeckPicker
+          words={this.state.words[this.state.group]}
+          doBegin={this.doBegin}
+        />
+      </>;
     } else {
-      const question = this.state.questions[this.state.currentWord];
-      const answer = this.state.answers[this.state.currentWord];
-      return (
-        <>
-          <Flashcard
-            question={question}
-            answer={answer}
-            doEvaluation={this.doEvaluation}
-          />
-          <ScoreTable
-            scores={this.state.scores}
-            questions={this.state.questions}
-          />
-        </>
-      );
+      return <>
+        <BackButton onClick={() => this.setState({decks: undefined})} />
+        <h1>Flashcards: {this.state.group}</h1>
+        <Flashcard
+          question={this.state.questions[this.state.currentWord]}
+          answer={this.state.answers[this.state.currentWord]}
+          doEvaluation={this.doEvaluation}
+        />
+        <ScoreTable
+          scores={this.state.scores}
+          questions={this.state.questions}
+        />
+      </>;
     }
   }
 }

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 const GroupPicker = ({ groups, handler }) => {
   const [selectedGroup, set_selectedGroup] = useState();
   const choices = groups.map((group, i) => (
-    <div>
+    <div key={i}>
       <label>
         <input
           type='radio'

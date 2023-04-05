@@ -48,6 +48,45 @@ const Util = {
     return result;
   },
 
+  fetchWords: (success, error) => {
+    if (isDevelopment()) {
+      success(getTestData());
+    } else {
+      fetch('/flashcards/words')
+        .then(res => res.json())
+        .then(data => success(data))
+        .catch(err => error(err.message));
+    }
+  },
+
+};
+
+const isDevelopment = () => (process.env['NODE_ENV'] === 'development');
+
+const getTestData = () => {
+  return {
+    'Verbs': {
+      'Avere': [
+        'i have', 'io ho', 'you have', 'to hai', 'he/she has', 'lui/lei ha',
+        'we have', 'noi abbiamo', 'you all have', 'voi avete', 'they have', 'loro hono'],
+      'Essere': [
+        'i am', 'io nono', 'you are', 'tu sai', 'he/she is', 'lui/lei e',
+        'we are', 'noi siamo', 'you all are', 'voi siete', 'they are', 'loro sono'],
+      'Tenere': [
+        'i hold', 'io tengo', 'you hold', 'tu tieni', 'he/she holds', 'lue/lei tiene',
+        'we hold', 'noi teniamo', 'you all hold', 'voi tenete', 'they hold', 'loro tengono'],
+    },
+    'Misc': {
+      'Days of the week': [
+        'Monday', 'lunedì', 'Tuesday', 'martedì', 'Wednesday', 'marcoledì',
+        'Thursday', 'giovedì', 'Friday', 'venerdì', 'Saturday', 'sabato', 'Sunday', 'domenica'],
+      'Months': [
+        'January', 'gennaio', 'February', 'febbraio', 'March', 'marzo',
+        'April', 'aprile', 'May', 'maggio', 'June', 'giugno',
+        'July', 'luglio', 'August', 'agosto', 'September', 'settembre',
+        'October', 'ottobre', 'November', 'novembre', 'December', 'dicembre'],
+    },
+  };
 };
 
 export default Util;
