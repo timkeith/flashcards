@@ -59,6 +59,31 @@ const Util = {
     }
   },
 
+  // Apply func to each key-value pair and return array of results.
+  // func maps (key, value) => newElement
+  mapObjectToArray: (object, func) => (
+    Object.entries(object).map(([key, value]) => (func(key, value)))
+  ),
+
+  // Apply func to each key-value pair and create a new object
+  // func maps (key, value) => [newKey, newValue]
+  mapObject: (object, func) => (
+    Object.fromEntries(Util.mapObjectToArray(object, func))
+    //Object.fromEntries(Object.entries(object).map(([key, value]) => (func(key, value))))
+  ),
+
+  // Apply func to each key-value pair and create a new object
+  // func maps (key, value) => newValue
+  mapObjectValues: (object, func) => (
+    Util.mapObject(object, (key, value) => [key, func(key, value)])
+  ),
+
+  // Apply func to each key-value pair and return a new objects containing entries that are true.
+  // func: (key, value) => should entry be included?
+  filterObject: (object, func) => (
+    Object.fromEntries(Object.entries(object).filter(([key, value]) => func(key, value)))
+  ),
+
 };
 
 const isDevelopment = () => (process.env['NODE_ENV'] === 'development');
