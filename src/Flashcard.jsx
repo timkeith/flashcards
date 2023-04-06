@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
 const evaluations = [
-  { delta: -1, title: 'Not at all' },
-  { delta:  0, title: 'A little' },
-  { delta: +1, title: 'Very well' },
+  { delta: -1, title: 'Not at all', keys: ['-', '_'] },
+  { delta:  0, title: 'A little',   keys: ['0']      },
+  { delta: +1, title: 'Very well',  keys: ['+', '='] },
 ];
 
-export default function Flashcard({ question, answer, doEvaluation }) {
+const Flashcard = ({ question, answer, doEvaluation }) => {
   const [showAnswer, set_showAnswer] = useState('');
-  return (
+  const showAction = () => set_showAnswer(true);
+  const evalAction = (e) => {
+    set_showAnswer(false);
+    doEvaluation(e.delta);
+  };
+  const handleKeyPress = (event) => {
+    const key = event.key;
+    if (showAnswer) {
+      evaluations.map((e) => e.keys.includes(key) && evalAction(e));
+    } else if (key === 's' || key === 'S' || key === 'Enter') {
+      showAction();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => document.removeEventListener('keydown', handleKeyPress);
+  }, [handleKeyPress]);
+  return <>
     <div id='Flashcard'>
       <div>
         <div className='language'>Domanda:</div>
@@ -27,7 +44,7 @@ export default function Flashcard({ question, answer, doEvaluation }) {
         <div className='word' hidden={showAnswer}>
           <Button
             variant='primary'
-            onClick={() => { set_showAnswer(true); }}>
+            onClick={showAction}>
             Show
           </Button>
         </div>
@@ -39,12 +56,14 @@ export default function Flashcard({ question, answer, doEvaluation }) {
             <Button
               key={e.delta}
               title={e.title}
-              onClick={() => { set_showAnswer(false); doEvaluation(e.delta); }}>
-              {e.delta > 0 ? '+' : e.delta < 0 ? '-' : '0'}
+              onClick={() => evalAction(e)}>
+              {e.keys[0]}
             </Button>
           ))}
         </div>
       </div>
     </div>
-  );
-}
+  </>;
+};
+
+export default Flashcard;
