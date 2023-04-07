@@ -16,18 +16,19 @@ const GroupPicker = ({ groups, handler }) => {
       </label>
     </div>
   ));
-  return (
+  return <>
     <div id='GroupPicker'>
       <h2>Choose Group of Decks</h2>
       <form>
         {choices}
         <Button
           variant='primary'
+          disabled={selectedGroup === undefined}
           onClick={() => handler(selectedGroup)}>
           Next
         </Button>
       </form>
     </div>
-  );
+  </>;
 };
 export default GroupPicker;
