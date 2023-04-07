@@ -84,6 +84,14 @@ const Util = {
     Object.fromEntries(Object.entries(object).filter(([key, value]) => func(key, value)))
   ),
 
+  // Numbers from start to less than stop by step
+  range: (start, stop, step) => {
+    const st = step === undefined ? 1 : step;
+    return Array.from(
+      { length: (stop - start + 1) / st },
+      (value, index) => start + index * st)
+  },
+
 };
 
 const isDevelopment = () => (process.env['NODE_ENV'] === 'development');

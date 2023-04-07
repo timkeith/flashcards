@@ -31,7 +31,25 @@ button.back {
   margin: 0.5em;
 }
 
-.Checkbox input {
+#PostDeckList {
+  font-size: 80%;
+}
+#ShowDecks .head {
+  padding-top: 1em;
+  font-weight: bold;
+}
+.ShowDecks {
+  margin-left: 0.5em;
+}
+#ShowDecks td {
+  padding-left: 1em;
+}
+#PostDeckList input {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+#DeckList input {
   margin-right: 0.5em;
   margin-left: 0.5em;
 }
