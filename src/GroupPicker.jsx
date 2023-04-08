@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 const GroupPicker = ({ groups, handler }) => {
-  const [selectedGroup, set_selectedGroup] = useState();
+  const [selectedGroup, set_selectedGroup] = React.useState();
   const choices = groups.map((group, i) => (
     <div key={i}>
       <label>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 const evaluations = [
@@ -8,7 +8,7 @@ const evaluations = [
 ];
 
 const Flashcard = ({ question, answer, doEvaluation }) => {
-  const [showAnswer, set_showAnswer] = useState('');
+  const [showAnswer, set_showAnswer] = React.useState('');
   const showAction = () => set_showAnswer(true);
   const evalAction = (e) => {
     set_showAnswer(false);
@@ -22,10 +22,11 @@ const Flashcard = ({ question, answer, doEvaluation }) => {
       showAction();
     }
   };
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [handleKeyPress]);
+
   return <>
     <div id='Flashcard'>
       <div>

@@ -1,25 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Util from './Util.js';
 
-const Checkbox = ({ label, isChecked, onChange }) => (
-  <div>
-    <label>
-      <input
-        type='checkbox'
-        name={label}
-        checked={isChecked}
-        onChange={onChange}
-      />
-      {label}
-    </label>
-  </div>
-);
-
 const DeckPicker = ({ words, doBegin }) => {
-  const [decks, set_decks] = useState(Util.mapObject(words, (deck) => [deck, false]));
-  const [reverseQAndA, set_reverseQAndA] = useState(false);
-  const [show, set_show] = useState(false);
+  const [reverse, set_reverse] = React.useState(false);
+  const [show, set_show] = React.useState(false);
+  const [decks, set_decks] = React.useState(
+    () => Util.mapObject(words, (deck) => [deck, false]));
 
   const handleChange = (deck) => {
     return () => (
@@ -33,10 +20,6 @@ const DeckPicker = ({ words, doBegin }) => {
 
   const getSelected = () => {
     return Object.keys(Util.filterObject(decks, (deck, sel) => (sel)));
-  }
-
-  const handleBegin = () => {
-    doBegin(getSelected(), reverseQAndA);
   };
 
   return <>
@@ -68,14 +51,14 @@ const DeckPicker = ({ words, doBegin }) => {
         <Button
           variant='primary'
           disabled={getSelected().length === 0}
-          onClick={handleBegin}>
+          onClick={() => doBegin(getSelected(), reverse)}>
           Study
         </Button>
         <br />
         <Checkbox
           label='Reverse questions and answers'
-          isChecked={reverseQAndA}
-          onChange={() => set_reverseQAndA(!reverseQAndA)} />
+          isChecked={reverse}
+          onChange={() => set_reverse(!reverse)} />
         <div id='ShowDecks'>
           <Checkbox
             label='Show selected decks'
@@ -83,7 +66,7 @@ const DeckPicker = ({ words, doBegin }) => {
             onChange={() => set_show(!show)}
           />
           { !show ? ''
-              : <ShowDecks selected={getSelected()} words={words} reverse={reverseQAndA}/> }
+              : <ShowDecks selected={getSelected()} words={words} reverse={reverse}/> }
         </div>
       </div>
     </div>
@@ -91,31 +74,42 @@ const DeckPicker = ({ words, doBegin }) => {
 }
 
 const ShowDecks = ({selected, words, reverse}) => (
-  <div className='ShowDecks'> {
-      selected.map((deck) => (
-        <div key={deck}>
+  <div className='ShowDecks'>{
+    selected.map((deck) => (
+      <div key={deck}>
         <div className='head'>{deck}</div>
-          {<ShowWords words={words[deck]} reverse={reverse}/>}
-        </div>
-      ))
-    }
-  </div>
+        <ShowWords words={words[deck]} reverse={reverse}/>
+      </div>
+    ))
+  }</div>
 );
     
 const ShowWords = ({words, reverse}) => (
   <table>
-    <tbody>
-      {
-        Util.range(0, words.length, 2).map((i) => (
-          <tr key={i}>
-            <td></td>
-            <td>{words[i + (reverse ? 1 : 0)]}</td>
-            <td>{words[i + (reverse ? 0 : 1)]}</td>
-          </tr>
-        ))
-      }
-    </tbody>
+    <tbody>{
+      Util.range(0, words.length, 2).map((i) => (
+        <tr key={i}>
+          <td></td>
+          <td>{words[i + (reverse ? 1 : 0)]}</td>
+          <td>{words[i + (reverse ? 0 : 1)]}</td>
+        </tr>
+      ))
+    }</tbody>
   </table>
+);
+
+const Checkbox = ({ label, isChecked, onChange }) => (
+  <div>
+    <label>
+      <input
+        type='checkbox'
+        name={label}
+        checked={isChecked}
+        onChange={onChange}
+      />
+      {label}
+    </label>
+  </div>
 );
 
 export default DeckPicker;

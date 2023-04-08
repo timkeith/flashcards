@@ -37,6 +37,7 @@ const Util = {
   },
 
   moveBucket: (buckets, value, from, to) => {
+    if (to >= buckets.length) console.error(`*** to is too big`);
     var result = [...buckets];
     const fi = result[from].indexOf(value);
     if (fi < 0) {
@@ -50,7 +51,7 @@ const Util = {
 
   fetchWords: (success, error) => {
     if (isDevelopment()) {
-      success(getTestData());
+      setTimeout(() => success(getTestData()), 2000);
     } else {
       fetch('/flashcards/words')
         .then(res => res.json())
@@ -69,7 +70,6 @@ const Util = {
   // func maps (key, value) => [newKey, newValue]
   mapObject: (object, func) => (
     Object.fromEntries(Util.mapObjectToArray(object, func))
-    //Object.fromEntries(Object.entries(object).map(([key, value]) => (func(key, value))))
   ),
 
   // Apply func to each key-value pair and create a new object
@@ -86,10 +86,11 @@ const Util = {
 
   // Numbers from start to less than stop by step
   range: (start, stop, step) => {
-    const st = step === undefined ? 1 : step;
+    if (!step) step = 1;
     return Array.from(
-      { length: (stop - start + 1) / st },
-      (value, index) => start + index * st)
+      { length: (stop - start + step - 1) / step },
+      (value, index) => start + index * step
+    );
   },
 
 };
